@@ -1,0 +1,97 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_show_tab.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yvanat <yvanat@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/15 01:47:22 by yvanat            #+#    #+#             */
+/*   Updated: 2019/07/15 23:23:15 by yvanat           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <unistd.h>
+#include "ft_stock_str.h"
+
+int		neg(int nb)
+{
+	if (nb == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		return (nb);
+	}
+	else if (nb == 0)
+	{
+		write(1, "0", 1);
+		return (nb);
+	}
+	else if (nb < 0)
+	{
+		write(1, "-", 1);
+		return (nb * -1);
+	}
+	else
+	{
+		return (nb);
+	}
+}
+
+void	write_while(int tab[])
+{
+	int		i;
+	int		first_non_0;
+
+	first_non_0 = 48;
+	i = -1;
+	while (i++ < 9)
+	{
+		if (tab[i] != 48)
+		{
+			first_non_0 = 49;
+		}
+		if (first_non_0 == 49)
+		{
+			write(1, &tab[i], 1);
+		}
+	}
+}
+
+void	ft_putnbr(int nb)
+{
+	int		nb1;
+	int		digit;
+	int		i;
+	int		tab[10];
+	char	c;
+
+	nb1 = neg(nb);
+	if ((nb1 != -2147483648) && (nb1 != 0))
+	{
+		i = 10;
+		while (i-- > 0)
+		{
+			digit = nb1 % 10;
+			nb1 = (nb1 - digit) / 10;
+			c = digit + 48;
+			tab[i] = c;
+		}
+		write_while(tab);
+	}
+}
+
+void	ft_show_tab(struct s_stock_str *par)
+{
+	int	i;
+
+	i = 0;
+	while ((*(par + i)).str)
+	{
+		write(1, (*(par + i)).str, (*(par + i)).size);
+		write(1, "\n", 1);
+		ft_putnbr((*(par + i)).size);
+		write(1, "\n", 1);
+		write(1, (*(par + i)).copy, (*(par + i)).size);
+		write(1, "\n", 1);
+		i++;
+	}
+}

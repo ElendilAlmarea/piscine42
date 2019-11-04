@@ -1,0 +1,5 @@
+Credentials cache: API:1A23269D-ECDD-40EF-B80F-FC6352178E2A
+        Principal: yvanat@42.FR
+
+  Issued                Expires             Flags    Principal
+Jul  1 11:24:09 2019  Jul  8 11:24:09 2019  FPRIA  krbtgt/42.FR@42.FR
